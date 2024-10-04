@@ -260,12 +260,3 @@ class KalmanFilter:
                 print(np.mean(smoothGains,axis=-1))
                 print(np.mean(smoothedSignal,axis=-1))
             
-    def loglikelihood(self, xs, ys):
-        #left for debug, it may have bugs too
-        BY = np.einsum('ij,jt -> it',self.B,ys)
-        AY = np.einsum('ij,jt -> it',self.A,ys[...,:-1])
-        return np.sum( - 0.5 * np.log(np.linalg.det(self.Rx)) - 
-                      0.5*np.einsum('jt,jt -> t',np.einsum('it,ij -> jt', (xs - BY), np.linalg.inv(self.Rx)), (xs - BY)) ) -\
-                      np.sum( 0.5 * np.log(np.linalg.det(self.Ry)) -
-                      0.5*np.einsum('jt,jt -> t',np.einsum('it,ij -> jt', (ys[...,1:] - AY), np.linalg.inv(self.Ry)), (ys[...,1:] - AY) ) )-\
-                      0.5*np.log(np.linalg.det(self.startCov)) - 0.5* np.inner( (ys[...,0]-self.startMean), np.linalg.inv(self.startCov)@(ys[...,0]-self.startMean) )
