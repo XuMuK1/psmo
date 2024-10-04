@@ -113,8 +113,7 @@ class KalmanFilter:
         
         K = aprioriErr@(self.B.T)@np.linalg.inv(self.Rx + self.B@aprioriErr@(self.B.T))# Kalman gain
         aposterioriY = aprioriY + K@(obs - self.B@aprioriY)
-        #IminKB = (np.eye(self.A.shape[0])-K@self.B)
-        aposterioriErr = aprioriErr - K@self.B@aprioriErr#IminKB@aprioriErr@IminKB.T + K@self.Rx@K.T
+        aposterioriErr = aprioriErr - K@self.B@aprioriErr
 
         return aprioriY,aprioriErr,aposterioriY,aposterioriErr, K
     
