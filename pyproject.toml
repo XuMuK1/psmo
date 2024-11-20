@@ -13,6 +13,10 @@ matplotlib = "^3.9.2"
 ipykernel = "^6.29.5"
 statsmodels = "^0.14.4"
 scikit-learn = "^1.5.2"
+nbmerge = "^0.0.4"
+nbformat = "^5.10.4"
+seaborn = "^0.13.2"
+tqdm = "^4.67.0"
 
 
 [build-system]
