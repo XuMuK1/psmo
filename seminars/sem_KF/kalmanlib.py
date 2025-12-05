@@ -25,9 +25,6 @@ class LinearGaussianSignalGenerator(SignalGenerator):
         self.B=B
         self.Ry=Ry
         self.Rx=Rx
-        self.d=self.A.shape[0]
-        self.v=self.B.shape[0]
-
         #add shape checks here
 
 
@@ -53,13 +50,13 @@ class LinearGaussianSignalGenerator(SignalGenerator):
         '''
         Measures the signal
         '''
-        return self.B @ y + self.v*np.random.multivariate_normal(np.zeros([self.B.shape[0]]), self.Rx)
+        return self.B @ y + np.random.multivariate_normal(np.zeros([self.B.shape[0]]), self.Rx)
     
     def evolution(self, y):
         '''
         Updates the signal wrto dynamics
         '''
-        return self.A @ y + self.d*np.random.multivariate_normal(np.zeros([self.A.shape[0]]), self.Ry)
+        return self.A @ y + np.random.multivariate_normal(np.zeros([self.A.shape[0]]), self.Ry)
     
 
 class KalmanFilter:
